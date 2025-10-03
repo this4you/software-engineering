@@ -10,7 +10,7 @@
     - Наприклад, студент №5 отримує тему **“Список покупок”**, студент №12 — **“Конвертер валют”**, і так далі.
 
 2. Створіть **новий проєкт у Jira**.
-    - Посилання на [JIRA]([https://drive.google.com/file/d/1S6U9u1pu8EcyFQkkYEZDTa4OGCCaEdO7/view?usp=sharing](https://www.atlassian.com/software/jira/free))
+    - Посилання на [JIRA](https://www.atlassian.com/software/jira/free)
     - Назва проєкту: *[Назва вашого застосунку]*.
     - Тип проєкту: **Scrum software project**.
 
