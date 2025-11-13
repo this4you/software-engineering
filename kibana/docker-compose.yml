@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    container_name: es-lab
+    environment:
+      - discovery.type=single-node              # режим одного вузла
+      - xpack.security.enabled=false            # вимикаємо безпеку, щоб не морочитись з логінами/паролями
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g              # пам'ять для JVM
+      - cluster.name=es-lab-cluster
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es-data:/usr/share/elasticsearch/data   # дані збережуться між перезапусками
+    ports:
+      - "9200:9200"                             # HTTP API Elasticsearch
+    networks:
+      - elk-net
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.15.0
+    container_name: kibana-lab
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - SERVER_NAME=kibana-lab
+      - SERVER_PUBLICBASEURL=http://localhost:5601
+    ports:
+      - "5601:5601"                             # веб-інтерфейс Kibana
+    networks:
+      - elk-net
+
+networks:
+  elk-net:
+    driver: bridge
+
+volumes:
+  es-data:
