@@ -1,0 +1,25 @@
+# Приклад .dockerignore — скопіюй у корінь проекту й лиши рядки під свій стек.
+# Мета: не тягнути в контекст збірки зайве (швидше build, менший образ).
+
+.git
+.gitignore
+.idea
+.vscode
+*.md
+Dockerfile*
+docker-compose.yml
+
+# --- Java / Gradle / Maven ---
+build/
+target/
+.gradle/
+
+# --- Node.js ---
+node_modules/
+npm-debug.log
+
+# --- Python ---
+venv/
+.venv/
+__pycache__/
+*.pyc

@@ -1,0 +1,20 @@
+# Приклад Dockerfile для Python (Flask / FastAPI / Django).
+# Скопіюй у корінь свого проекту під іменем "Dockerfile" і розкоментуй потрібний CMD.
+# Збірка: docker build -t <прізвище>-coursework:1.0 .
+# Запуск: docker run -d -p 8000:8000 <прізвище>-coursework:1.0
+
+FROM python:3.12-slim
+WORKDIR /app
+
+# Спершу залежності (краще кешується), потім код
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+
+EXPOSE 8000
+
+# Обери рядок під свій фреймворк (решту прибери):
+# Flask:    CMD ["flask", "run", "--host=0.0.0.0", "--port=8000"]
+# FastAPI:  CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Django:   CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "app.py"]
